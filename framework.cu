@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <cuda_runtime.h>
 //1,2,4,8,16,32,64,128,256,512,1024
-#define R 32
+#define R 128
 #define SIZE 1024*1024*32
 
 #include "kernel.cu"
@@ -38,8 +38,8 @@ int main(int argc, char **argv){
     average = (float*)malloc(SIZE*sizeof(average[0]));
     average_gpu = (float*)malloc(SIZE*sizeof(average[0]));
     for (int i = 0; i < SIZE; i++)
-        input[i] = 1.0f;
-        // (float)rand() / float(RAND_MAX);
+        // input[i] = 1.0f;
+        input[i] = (float)rand() / float(RAND_MAX);
  
     // allocate and set device memory
     if (cudaMalloc((void**)&dinput, SIZE*sizeof(dinput[0])) != cudaSuccess
